@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Logue Builder</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+@font-face {
+  font-family: 'timoKind';
+  src: url('font/timoKind.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'textact';
+  src: url('font/Homestuck\ Regular\ \(Epilogues\ font\).ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'frogkind';
+  src: url('font/Holy\ Empire\ \(Genesis\ Frog\ album\).ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'lora';
+  src: url('font/Lora-Variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ryman Eco';
+  src: url('font/RymanEco-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Univers';
+  src: url('font/UniversRegular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bodoni Moda Italic';
+  src: url('font/BodoniModa-Italic-VariableFont_opsz\,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gunter';
+  src: url('font/gunter.ttf') format('truetype');
+}
+
+.eco{
+  font-family: 'Ryman Eco';
+}
+  body {
+    font-family: 'Courier New', monospace;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    gap: 0;
+  }
+
+  /* ── LEFT PANEL ── */
+  #panel {
+    width: 340px;
+    min-width: 340px;
+    background: #111;
+    border-right: 2px solid #333;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+    overflow-y: auto;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+
+  #panel h1 {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #777;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+  }
+
+  .mode-tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 6px 4px;
+    font-size: 0.7rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tab:hover { color: #ccc; border-color: #555; }
+  .tab.active { background: #2a2a2a; color: #e0e0e0; border-color: #888; }
+
+  .section { display: flex; flex-direction: column; gap: 8px; }
+  .section.hidden { display: none; }
+
+  label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  textarea, select, input[type="text"] {
+    width: 100%;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    padding: 8px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  textarea:focus, select:focus, input[type="text"]:focus {
+    border-color: #666;
+  }
+
+  textarea { min-height: 70px; }
+
+  select option { background: #1e1e1e; }
+
+  .sayer-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .sayer-btn {
+    padding: 6px 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    cursor: pointer;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #999;
+    transition: all 0.12s;
+    text-align: center;
+  }
+
+  .sayer-btn:hover { border-color: #666; color: #ddd; }
+  .sayer-btn.selected { border-color: #aaa; background: #2a2a2a; color: #fff; }
+
+  .action-btn {
+    padding: 9px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid #555;
+    background: #222;
+    color: #ccc;
+    transition: all 0.15s;
+  }
+
+  .action-btn:hover { background: #333; color: #fff; border-color: #888; }
+  .action-btn.primary { border-color: #888; background: #2a2a2a; color: #fff; }
+  .action-btn.primary:hover { background: #3a3a3a; }
+  .action-btn.danger { border-color: #633; color: #f88; }
+  .action-btn.danger:hover { background: #2a1a1a; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #2a2a2a;
+    margin: 4px 0;
+  }
+
+  .size-opts { display: flex; gap: 6px; }
+  .size-btn {
+    flex: 1; padding: 6px; font-family: 'Courier New', monospace; font-size: 0.72rem;
+    cursor: pointer; border: 1px solid #333; background: #1a1a1a; color: #777;
+    text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.12s;
+  }
+  .size-btn:hover { border-color: #666; color: #ddd; }
+  .size-btn.selected { border-color: #aaa; background: #2a2a2a; color: #fff; }
+
+  /* logtainer options */
+  .logtainer-class-opts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .lc-btn {
+    padding: 5px 10px; font-family: 'Courier New', monospace; font-size: 0.72rem;
+    cursor: pointer; border: 1px solid #333; background: #1a1a1a; color: #777;
+    transition: all 0.12s;
+  }
+  .lc-btn:hover { border-color: #666; color: #ddd; }
+  .lc-btn.selected { border-color: #aaa; background: #2a2a2a; color: #fff; }
+
+  /* ── RIGHT PANEL ── */
+  #workspace {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #workspace-header {
+    padding: 12px 16px;
+    background: #111;
+    border-bottom: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  #workspace-header span {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  .header-btns { display: flex; gap: 8px; }
+
+  /* PREVIEW — styled like actual textlog */
+  #preview-wrap {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #181818;
+  }
+
+  #preview {
+    background-color: #dfdfdf;
+    border: 2px solid #aaa;
+    padding-left: 13px;
+    padding-right: 9px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: fit-content;
+    min-width: 320px;
+    max-width: 700px;
+    font-family: 'textact', 'Courier New', monospace;
+    position: relative;
+  }
+
+  /* Global Block Spacing Rule for Paragraph Breaks */
+  #preview p, #preview ul, #preview ol {
+    margin-bottom: 1.2rem;
+  }
+  #preview p:last-child, #preview ul:last-child, #preview ol:last-child {
+    margin-bottom: 0;
+  }
+
+  #preview .narr { 
+    color: #333; 
+    font-style: italic; 
+    margin: 2px 0 1.2rem 0; 
+    display: block; 
+    font-size: 1.575rem;
+  }
+
+  #preview .narr .faz{ 
+    font-size: 2rem !important; 
+  }
+  #preview .narr:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Chat Reaction Text Alignment Style Block */
+  #preview .react {
+    font-size: 1.0rem !important;
+    color: black;
+    opacity: 0.5;
+    margin-top: -1.6rem; 
+    margin-bottom: 0.8rem;
+    display: block;
+    font-family: 'textact', monospace;
+  }
+
+
+  #preview .react:last-child {
+    margin-bottom: 0;
+  }
+
+  /* List rendering formatting for Textlog consistency */
+  #preview ul, #preview ol {
+    padding-left: 26px;
+    margin-top: 4px;
+  }
+  #preview li {
+    margin-bottom: 2px;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    text-shadow: inherit;
+  }
+
+  /* Universal active interactive highlights */
+  #preview .pickable-target {
+    cursor: pointer;
+    outline: 1px dashed transparent;
+    transition: all 0.12s;
+  }
+  #preview .pickable-target:hover {
+    background: rgba(235, 220, 100, 0.25) !important;
+    outline: 1px solid #111;
+  }
+
+  /* actual sayer styles inside preview */
+  #preview .Lupi{ color:#2c58b0; font-family: 'Average'; font-size: 1.65rem; }
+  #preview .Luca{ color:#252f73; font-family: 'Comfortaa'; font-size: 1.5rem; }
+  #preview .rototi{ font-family: 'Times New Roman'; color: purple; background: linear-gradient(45deg, purple, #d35400); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.575rem; }
+  #preview .nardog{ font-family: 'Courier New', Courier, monospace; font-size: 1.65rem; background: linear-gradient(45deg, #404040, black); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    #preview .faz {
+    color: #000000;
+    font-family: 'Elegant Sans';
+    font-size: 3rem;
+    display: block;
+    background: linear-gradient(to right, transparent 0%, rgba(135, 206, 235, 0.4) 3%, rgba(135, 206, 235, 0.4) 97%, transparent 100%);
+    padding-right: 20px;  
+    line-height: 1.2;    
+    margin-top: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  #preview .react .faz {
+    font-size: 2.0rem !important;
+    display: inline;
+    margin-top: 5px;
+  }
+
+  #preview .respond .faz.resq{
+    font-size: 2rem;
+  }
+
+  #preview .narr .faz{ 
+    font-size: 3.3rem;
+    display: inline;
+  }
+
+  #preview .respond .faz.resq::before {
+    content: "response to — ";
+    font-family: 'textact';
+    color: black;
+    text-shadow: 0px 0px 0px;
+    font-size: 1.1rem;
+    opacity: 1;
+  }
+  #preview .Chiara{
+    font-family: 'Glacial Indifference';
+    font-size: 1.75rem;
+    color: pink;
+    text-shadow: 0.1px 0.1px 2.5px rgb(38, 2, 38), -0.1px -0.1px 2.5px rgb(38, 2, 38), 0.1px -0.6px 2.5px rgb(38, 2, 38), -0.1px 0.1px 2.5px rgb(38, 2, 38);
+  }
+  #preview .Chiara{
+    font-family: 'Glacial Indifference';
+    font-size: 1.75rem;
+    color: pink;
+    text-shadow: 0.1px 0.1px 2.5px rgb(38, 2, 38), -0.1px -0.1px 2.5px rgb(38, 2, 38), 0.1px -0.6px 2.5px rgb(38, 2, 38), -0.1px 0.1px 2.5px rgb(38, 2, 38);
+  }
+  #preview .mart{
+    font-family: 'Indie Flower';
+    font-size: 1.8rem;
+    color: pink;
+    text-shadow: 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88, 0px 0px 3px #9caf88;
+  }
+
+  @font-face { font-family: 'Gear Shift'; src: url('font/Gear\ Shift.otf') format('opentype');}
+  @font-face { font-family: 'Fighter Attack'; src: url('font/Fighter\ Attack.ttf') format('truetype'); }
+  
+  #preview .san{ color: #000000; font-family: 'Gear Shift'; font-size: 1.75rem; }
+  #preview .cafe{
+    color:#4f0000; font-family: 'timoKind'; font-size: 1.45rem;
+    text-shadow: 0px 0px 0.7px #eedb9d, 0px 0px 0.7px #eedb9d, 0px 0px 0.7px #eedb9d, 0px 0px 0.7px #eedb9d, 0px 0px 0.7px #eedb9d, 0px 0px 0.7px #eedb9d, 0px 0px 0.7px #eedb9d, 0px 0px 0.7px #4f0000, 0px 0px 0.7px #eedb9d;
+  }
+  #preview .millis{
+  font-family: 'Courier New';
+  color: pink;
+  background: linear-gradient(270deg, rgb(255, 255, 255), white, #104600, #104600);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+  drop-shadow(0px 0px 1px black)
+  drop-shadow(0px 0px 1px #104600)
+  drop-shadow(0px 0px 1px rgba(0,0,0,0.6));
+  font-size: 1.65rem;
+}
+  
+
+  #preview .dFan{
+  color:#0008ff;
+  font-family: 'EB Garmond';  
+  font-size: 2rem;
+}
+
+  #preview .tronk{ color:#ff0000; font-size: 1.45rem; font-family: 'Arial', Helvetica, sans-serif; }
+  #preview .elkrack{ color:#00606b; font-size: 1.45rem; font-family: 'lora', cursive; }
+  #preview .mono{ color: #00570d; font-size: 1.45rem; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif }
+  #preview .nata{
+  color: #000000;
+  font-size: 2rem;
+  font-family: 'Arthein';
+  text-shadow: 
+  0px 0px 1px #B695C0,
+  0px 0px 1px #B695C0,
+  0px 0px 1px #B695C0,
+  0px 0px 1px #B695C0,
+  0px 0px 1px #B695C0,
+  0px 0px 10px #B695C0,
+  0px 0px 1px #B695C0;
+  line-height: 1.2;    
+  margin-top: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+  #preview .yungx{ font-family: 'Gunter'; color: #590016; font-size: 1.1075rem; }
+  #preview .m3Again{ font-family: 'Bodoni Moda Italic'; font-size: 1.575rem; color: rgb(104, 0, 0); text-shadow: 1.5px 1.5px 0.1px #ced2ff; }
+  #preview .lessoul { color:#0000009d; margin: 2px 0 1.2rem 0; display: block; }
+  #preview .lessoul:last-child { margin-bottom: 0; }
+
+  #preview .respond {
+    display: flex; flex-direction: column;
+    border-left: 3px solid rgba(0,0,0,0.3);
+    padding-left: 8px; margin: 6px 0 1.2rem 0;
+  }
+  #preview .respond .faz.resq{ font-size: 2rem; }
+  #preview .respond .faz.resq::before {
+    content: "response to — "; font-family: 'textact'; color: black; text-shadow: 0px 0px 0px; font-size: 1.1rem; opacity: 1;
+  }
+  #preview .respond:last-child { margin-bottom: 0; }
+
+  #preview .medial {
+    display: flex; flex-direction: column;
+    border-left: 3px solid rgba(0,0,0,0.3);
+    padding-left: 8px; margin: 6px 0 1.2rem 0;
+  }
+  #preview .medial:last-child { margin-bottom: 0; }
+  #preview .medial img, #preview .medial video { display: block; margin-top: 4px; }
+  #preview .medial audio { display: block; margin-top: 4px; width: 100%; max-width: 300px; }
+  
+  #preview .little { max-width: 19%; }
+  #preview .medium { max-width: 50%; }
+  #preview .big { max-width: 100%; }
+  
+  #preview .resq { font-size: 1.1rem; opacity: 0.5; margin: 0 0 4px 0 !important; }
+  #preview .resq::before {
+    content: "response to — "; font-family: 'textact'; color: black; text-shadow: 0px 0px 0px;; font-size: 0.85em; opacity: 1;
+  }
+
+  .entry-wrap { position: relative; padding: 1px 2px; }
+  .entry-wrap:hover { background: rgba(0,0,0,0.06); }
+
+  .entry-controls {
+    display: none; position: absolute; right: 2px; top: -5px; width: 50%; transform: translateY(-50%);
+    gap: 3px; float: right; align-items: center; background: rgba(220,220,220,0.95); border: 1px solid #aaa; padding: 2px 4px; z-index: 10;
+  }
+  .entry-wrap:hover .entry-controls { display: flex; }
+
+  .ec-btn {
+    font-size: 0.6rem; font-family: monospace; padding: 2px 5px; cursor: pointer; border: 1px solid #aaa; background: #eee; color: #333; white-space: nowrap;
+  }
+  .ec-btn:hover { background: #ccc; }
+  .ec-btn.del { color: #900; border-color: #c88; }
+  .ec-btn.del:hover { background: #fdd; }
+
+  .sayer-popup {
+    position: absolute; background: #111; border: 1px solid #555; z-index: 100; display: none;
+    flex-direction: column; gap: 2px; padding: 4px; right: 0; top: 100%; min-width: 145px; max-height: 250px;
+  }
+  .sayer-popup.show { display: flex; }
+  .sayer-popup .sp-search {
+    width: 100%; margin: 0 0 3px 0; padding: 5px 7px; font-family: 'Courier New', monospace; font-size: 0.72rem; background: #1a1a1a; color: #e0e0e0; border: 1px solid #444; outline: none; box-sizing: border-box;
+  }
+  .sayer-popup .sp-search:focus { border-color: #777; }
+  .sayer-popup .sp-scroll { max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; }
+  .sp-opt {
+    font-family: 'Courier New', monospace; font-size: 0.72rem; padding: 4px 8px; cursor: pointer; color: #ccc; white-space: nowrap;
+  }
+  .sp-opt:hover { background: #333; }
+
+  .word-span-popup {
+    position: fixed; background: #111; border: 1px solid #555; z-index: 200; display: none;
+    flex-direction: column; gap: 2px; padding: 4px; min-width: 160px; max-height: 280px; overflow-y: hidden;
+  }
+  .word-span-popup.show { display: flex; }
+  .wsp-title { font-size: 0.62rem; color: #555; padding: 2px 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .wsp-opt {
+    font-family: 'Courier New', monospace; font-size: 0.72rem; padding: 4px 8px; cursor: pointer; color: #ccc;
+  }
+  .wsp-opt:hover { background: #333; }
+
+  #output-wrap {
+    border-top: 2px solid #333; background: #111; max-height: 220px; display: flex; flex-direction: column;
+  }
+  #output-header {
+    padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2a2a2a;
+  }
+  #output-header span { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: #555; }
+  #output {
+    font-family: 'Courier New', monospace; font-size: 0.75rem; color: #8ec; padding: 10px 14px; overflow-y: auto; white-space: pre; flex: 1; line-height: 1.6;
+  }
+
+  .copy-btn {
+    font-family: 'Courier New', monospace; font-size: 0.65rem; padding: 3px 8px; cursor: pointer; border: 1px solid #444; background: #1a1a1a; color: #777; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .copy-btn:hover { color: #ccc; border-color: #666; }
+
+  .narr-word {
+    cursor: pointer; text-decoration: underline dotted #aaa; border-radius: 2px; font-size: 1rem !important; padding: 0 1px;
+  }
+  .narr-word:hover { background: rgba(0,0,0,0.1); }
+  .narr-word.spanned { text-decoration: none; }
+  
+  .narr-word a { cursor: pointer; color: inherit; text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div id="panel">
+  <h1>Logue Builder</h1>
+
+  <div class="mode-tabs">
+    <button class="tab active" onclick="setMode('normal')" id="tab-normal">Message</button>
+    <button class="tab" onclick="setMode('narr')" id="tab-narr">Narr</button>
+  </div>
+
+  <div class="section" id="sec-normal">
+    <div id="normal-respond-box" style="display: none; background: #221a1a; border: 1px solid #533; padding: 8px; position: relative;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <label style="color: #f99;">Responding To</label>
+        <button onclick="clearResponseMode(event)" style="background: none; border: none; color: #f88; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0 4px;">✕</button>
+      </div>
+      <div id="respond-source-display" style="font-size:0.75rem; color:#bba; font-family:'Courier New',monospace; max-height: 50px; overflow-y: auto;"></div>
+    </div>
+
+    <label>Sayer</label>
+    <input type="text" id="sayer-search-normal" placeholder="Search sayer character..." style="margin-bottom: 4px;">
+    <div class="sayer-select" id="sayer-normal"></div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <label>Message</label>
+      <button type="button" class="ec-btn" style="background: #222; color: #aaa;" onclick="insertLink('msg-normal')">🔗 Link Text</button>
+    </div>
+    <textarea id="msg-normal" placeholder="Write message…" onkeydown="handleEnter(event,'normal')"></textarea>
+    
+    <div style="margin: 2px 0 4px 0; display: flex; flex-direction: column; gap: 5px;">
+      <div style="display: flex; gap: 4px;">
+        <button type="button" class="ec-btn" style="flex:1; padding:6px; background:#1e1e1e; border:1px solid #333; color:#999;" onclick="addMediaRow('img')">+ Image</button>
+        <button type="button" class="ec-btn" style="flex:1; padding:6px; background:#1e1e1e; border:1px solid #333; color:#999;" onclick="addMediaRow('vid')">+ Video</button>
+        <button type="button" class="ec-btn" style="flex:1; padding:6px; background:#1e1e1e; border:1px solid #333; color:#999;" onclick="addMediaRow('aud')">+ Audio</button>
+      </div>
+      <div id="media-list" style="display: flex; flex-direction: column; gap: 4px;"></div>
+    </div>
+
+    <button class="action-btn primary" onclick="addNormal()">↵ Add Entry</button>
+  </div>
+
+  <div class="section hidden" id="sec-narr">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <label>Narration text</label>
+      <button type="button" class="ec-btn" style="background: #222; color: #aaa;" onclick="insertLink('msg-narr')">🔗 Link Text</button>
+    </div>
+    <textarea id="msg-narr" placeholder="Write narration… (asterisks added auto)" onkeydown="handleEnter(event,'narr')"></textarea>
+    <button class="action-btn primary" onclick="addNarr()">↵ Add Narration</button>
+    
+    <div style="margin-top: 10px; border-top: 1px dashed #333; padding-top: 10px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <label>Reaction text</label>
+        <button type="button" class="ec-btn" style="background: #222; color: #aaa;" onclick="insertLink('msg-react')">🔗 Link Text</button>
+      </div>
+      <textarea id="msg-react" placeholder="e.g., timo reacted with ❤️" onkeydown="handleEnter(event,'react')"></textarea>
+      <button class="action-btn primary" style="width: 100%;" onclick="addReact()">↵ Add Reaction</button>
+    </div>
+    
+    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-top:4px;">After adding, click any word in a narration block to assign a sayer class to it.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <label>Logtainer extra class</label>
+    <div class="logtainer-class-opts">
+      <button class="lc-btn" onclick="toggleLC('connected',this)">connected</button>
+      <button class="lc-btn" onclick="toggleLC('ttg-H',this)">ttg-H</button>
+      <button class="lc-btn" onclick="toggleLC('norm',this)">norm</button>
+      <button class="lc-btn" onclick="toggleLC('POU',this)">POU</button>
+      <button class="lc-btn" onclick="toggleLC('chuds',this)">chuds</button>
+    </div>
+    <button class="action-btn primary" onclick="generateLogtainer()">⬡ Create Logtainer</button>
+    <button class="action-btn danger" onclick="clearAll()">✕ Clear all</button>
+  </div>
+</div>
+
+<div id="workspace">
+  <div id="workspace-header">
+    <span>Preview</span>
+    <div class="header-btns">
+      <button class="copy-btn" onclick="copyOutput()">copy output</button>
+    </div>
+  </div>
+
+  <div id="preview-wrap">
+    <div id="preview">
+      </div>
+  </div>
+
+  <div id="output-wrap">
+    <div id="output-header">
+      <span>Generated HTML</span>
+      <button class="copy-btn" onclick="copyOutput()">copy</button>
+    </div>
+    <div id="output"></div>
+  </div>
+</div>
+
+<div class="word-span-popup" id="wsp"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════════════
+const SAYERS = [
+  { key: 'cafe',    label: 'Timo',   cls: 'cafe'},
+  { key: 'millis',    label: 'Milla',   cls: 'millis'},
+  { key: 'dFan',    label: 'Chad',   cls: 'dFan'},
+  { key: 'Chiara',    label: 'Chiara',   cls: 'Chiara'},
+  { key: 'faz',    label: 'Fabri',   cls: 'faz'},
+  { key: 'mart',    label: 'martina',   cls: 'mart'},
+  { key: 'Lupi',    label: 'Lupi',   cls: 'Lupi'    },
+  { key: 'rototi',    label: 'Fede',   cls: 'rototi'    },
+  { key: 'Luca',    label: 'Luca',   cls: 'Luca'    },
+  { key: 'elkrack', label: 'Raz',    cls: 'elkrack' },
+  { key: 'tronk',   label: 'Dani',   cls: 'tronk'   },
+  { key: 'mono',    label: 'Lucas',  cls: 'mono'    },
+  { key: 'nata',    label: 'Nata',   cls: 'nata'    },
+  { key: 'yungx',   label: 'Sebs',   cls: 'yungx'   },
+  { key: 'm3Again', label: 'megan',  cls: 'm3Again' },
+  { key: 'lessoul', label: 'lessoul',cls: 'lessoul' },  
+  { key: 'san', label: 'san',cls: 'san' },  
+  { key: 'nardog', label: 'Bruno',cls: 'nardog' },
+];
+
+let entries = [];
+let selectedSayers = { normal: null };
+let selectedLCs = new Set();
+let respondSource = null; 
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+function init() {
+  const wrap = document.getElementById('sayer-normal');
+  SAYERS.forEach(s => {
+    const b = document.createElement('button');
+    b.className = 'sayer-btn';
+    b.textContent = s.label;
+    b.dataset.key = s.key;
+    b.onclick = () => selectSayer('normal', s.key, b);
+    wrap.appendChild(b);
+  });
+
+  const sideSearchInput = document.getElementById('sayer-search-normal');
+  if (sideSearchInput) {
+    sideSearchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const buttons = wrap.querySelectorAll('.sayer-btn');
+      buttons.forEach(btn => {
+        const sayerKey = btn.dataset.key;
+        const sayerObj = SAYERS.find(s => s.key === sayerKey);
+        const matches = sayerObj.label.toLowerCase().includes(query) || sayerObj.cls.toLowerCase().includes(query);
+        btn.style.display = matches ? 'block' : 'none';
+      });
+    });
+
+    sideSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const buttons = Array.from(wrap.querySelectorAll('.sayer-btn'));
+        const firstVisible = buttons.find(btn => btn.style.display !== 'none');
+        if (firstVisible) {
+          firstVisible.click();
+        }
+      }
+    });
+  }
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('.narr-word')) {
+      e.preventDefault();
+      e.stopPropagation();
+      showWordPopup(e, e.target.closest('.narr-word'));
+      return;
+    }
+
+    if (!e.target.closest('#wsp')) {
+      document.getElementById('wsp').classList.remove('show');
+    }
+    
+    if (!e.target.closest('.sayer-popup') && !e.target.classList.contains('ec-btn')) {
+      document.querySelectorAll('.sayer-popup.show').forEach(p => p.classList.remove('show'));
+    }
+  });
+}
+
+function selectSayer(mode, key, btn) {
+  selectedSayers[mode] = key;
+  document.querySelectorAll('#sayer-'+mode+' .sayer-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+
+  const targetTextarea = document.getElementById('msg-' + mode);
+  if (targetTextarea) {
+    targetTextarea.focus();
+  }
+}
+
+function toggleLC(cls, btn) {
+  if (selectedLCs.has(cls)) { selectedLCs.delete(cls); btn.classList.remove('selected'); }
+  else { selectedLCs.add(cls); btn.classList.add('selected'); }
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODE SWITCHING
+// ═══════════════════════════════════════════════════════
+let currentMode = 'normal';
+function setMode(m) {
+  currentMode = m;
+  ['normal','narr'].forEach(x => {
+    document.getElementById('sec-'+x).classList.toggle('hidden', x !== m);
+    document.getElementById('tab-'+x).classList.toggle('active', x === m);
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+//  RESPONSE ENGINE TRIGGERS
+// ═══════════════════════════════════════════════════════
+function activateResponseMode(sourceObj) {
+  respondSource = sourceObj;
+  document.getElementById('normal-respond-box').style.display = 'block';
+  document.getElementById('respond-source-display').textContent = (sourceObj.label ? sourceObj.label + ': ' : '') + sourceObj.text;
+  setMode('normal');
+  setTimeout(() => document.getElementById('msg-normal').focus(), 50);
+}
+
+function clearResponseMode(e) {
+  if (e) e.stopPropagation();
+  respondSource = null;
+  document.getElementById('normal-respond-box').style.display = 'none';
+  document.getElementById('respond-source-display').textContent = '';
+}
+
+// ═══════════════════════════════════════════════════════
+//  LINK WRAPPER ENGINE
+// ═══════════════════════════════════════════════════════
+function insertLink(textareaId) {
+  const ta = document.getElementById(textareaId);
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  if (start === end) {
+    alert("Please highlight the text you want to link first.");
+    return;
+  }
+  const url = prompt("Enter the URL for this link:");
+  if (!url) return;
+  const sel = ta.value.substring(start, end);
+  const before = ta.value.substring(0, start);
+  const after = ta.value.substring(end);
+  ta.value = before + `<a href="${url}">${sel}</a>` + after;
+  ta.focus();
+}
+
+function escHtml(str) {
+  const temp = [];
+  str = str.replace(/<a\s+href="([^"]*)">([\s\S]*?)<\/a>/gi, (match, url, text) => {
+    temp.push({url, text});
+    return `__LINK_${temp.length - 1}__`;
+  });
+  /*
+  str = str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');*/
+  
+  temp.forEach((link, i) => {
+    str = str.replace(`__LINK_${i}__`, `<a href="${link.url}">${link.text}</a>`);
+  });
+  return str;
+}
+
+function tokenizeForNarr(text) {
+  let temp = [];
+  let str = text.replace(/<a\s+href="([^"]*)">([\s\S]*?)<\/a>/gi, (match) => {
+      temp.push(match);
+      return `__LINK_${temp.length-1}__`;
+  });
+  let tokens = str.split(/(\s+)/);
+  return tokens.map(t => {
+      let match = t.match(/__LINK_(\d+)__/);
+      if (match) {
+          return t.replace(`__LINK_${match[1]}__`, temp[parseInt(match[1])]);
+      }
+      return t;
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+//  DYNAMIC MULTI-MEDIA ATTACHMENTS
+// ═══════════════════════════════════════════════════════
+function addMediaRow(type) {
+  const list = document.getElementById('media-list');
+  const row = document.createElement('div');
+  row.className = 'media-input-row';
+  row.dataset.type = type;
+  row.style.cssText = 'padding: 6px; background: #151515; border: 1px solid #262626; display: flex; flex-direction: column; gap: 4px;';
+  
+  let defaultPath = type === 'img' ? 'other/memes/' : 'diary/';
+  let labelText = type === 'img' ? 'Image' : type === 'vid' ? 'Video' : 'Audio';
+
+  let innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <label style="font-size: 0.6rem; color: #888;">${labelText} Path</label>
+      <button type="button" onclick="this.closest('.media-input-row').remove()" style="background:none;border:none;color:#f88;cursor:pointer;font-size:0.7rem;">✕</button>
+    </div>
+    <input type="text" class="media-path" value="${defaultPath}" onkeydown="handleEnter(event,'normal')">
+  `;
+
+  if (type === 'img' || type === 'vid') {
+    innerHTML += `
+      <div class="size-opts" style="margin-top:2px;">
+        <button class="size-btn selected" type="button" onclick="selectMediaRowSize(this, 'little')">little</button>
+        <button class="size-btn" type="button" onclick="selectMediaRowSize(this, 'medium')">medium</button>
+        <button class="size-btn" type="button" onclick="selectMediaRowSize(this, 'big')">big</button>
+      </div>
+      <input type="hidden" class="media-size" value="little">
+    `;
+  }
+  row.innerHTML = innerHTML;
+  list.appendChild(row);
+}
+
+function selectMediaRowSize(btn, size) {
+  const row = btn.closest('.media-input-row');
+  row.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  row.querySelector('.media-size').value = size;
+}
+
+// ═══════════════════════════════════════════════════════
+//  ENTER KEY
+// ═══════════════════════════════════════════════════════
+function handleEnter(e, mode) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (mode === 'normal') addNormal();
+    if (mode === 'narr') addNarr();
+    if (mode === 'react') addReact();
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  BLOCK ENGINE: PARSE PARAGRAPHS, BREAKS AND LISTS
+// ═══════════════════════════════════════════════════════
+function renderBlocks(text, cls, label, isOutput = false) {
+  if (!text) return '';
+  const lines = text.split('\n');
+  let html = '';
+  let inList = false;
+  let currentListType = null; 
+  let labelApplied = false;
+  let currentParaLines = [];
+  
+  const targetCls = isOutput ? '' : ' pickable-target';
+
+  function closeList() {
+    if (inList) {
+      html += `</${currentListType}>\n`;
+      inList = false;
+      currentListType = null;
+    }
+  }
+
+  function closePara() {
+    if (currentParaLines.length > 0) {
+      const prefix = (!labelApplied && label) ? label : '';
+      labelApplied = true;
+      const content = currentParaLines.join('<br>');
+      html += `<p class="${cls}${targetCls}">${prefix}${content}</p>\n`;
+      currentParaLines = [];
+    }
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    const bulletMatch = line.match(/^([\-\*\•])\s+(.*)/);
+    const numericMatch = line.match(/^(\d+)\.\s+(.*)/);
+
+    if (bulletMatch) {
+      closePara();
+      if (!inList || currentListType !== 'ul') {
+        closeList();
+        html += `<ul class="${cls}${targetCls}">\n`;
+        inList = true;
+        currentListType = 'ul';
+      }
+      html += `  <li>${escHtml(bulletMatch[2])}</li>\n`;
+    } else if (numericMatch) {
+      closePara();
+      if (!inList || currentListType !== 'ol') {
+        closeList();
+        html += `<ol class="${cls}${targetCls}">\n`;
+        inList = true;
+        currentListType = 'ol';
+      }
+      html += `  <li>${escHtml(numericMatch[2])}</li>\n`;
+    } else if (trimmed === '') {
+      if (lines.length === 1 && line.length > 0) {
+        closeList();
+        currentParaLines.push(escHtml(line));
+      } else {
+        closeList();
+        closePara();
+      }
+    } else {
+      closeList();
+      currentParaLines.push(escHtml(line));
+    }
+  }
+  closeList();
+  closePara();
+
+  if (html === '') {
+    html = `<p class="${cls}${targetCls}">${label || ''}&nbsp;</p>\n`;
+  }
+  return html;
+}
+
+// ═══════════════════════════════════════════════════════
+//  NARRATOR MULTI-BLOCK PARSER ENGINE
+// ═══════════════════════════════════════════════════════
+function parseNarrBlocks(text) {
+  const lines = text.split('\n');
+  let blocks = [];
+  let currentParaLines = [];
+  let currentList = null;
+
+  function closePara() {
+    if (currentParaLines.length > 0) {
+      blocks.push({
+        type: 'p',
+        lines: currentParaLines.map(line => tokenizeForNarr(line))
+      });
+      currentParaLines = [];
+    }
+  }
+
+  function closeList() {
+    if (currentList) {
+      blocks.push(currentList);
+      currentList = null;
+    }
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    const bulletMatch = line.match(/^([\-\*\•])\s+(.*)/);
+    const numericMatch = line.match(/^(\d+)\.\s+(.*)/);
+
+    if (bulletMatch) {
+      closePara();
+      if (!currentList || currentList.type !== 'ul') {
+        closeList();
+        currentList = { type: 'ul', items: [] };
+      }
+      currentList.items.push(tokenizeForNarr(bulletMatch[2]));
+    } else if (numericMatch) {
+      closePara();
+      if (!currentList || currentList.type !== 'ol') {
+        closeList();
+        currentList = { type: 'ol', items: [] };
+      }
+      currentList.items.push(tokenizeForNarr(numericMatch[2]));
+    } else if (trimmed === '') {
+      if (lines.length === 1 && line.length > 0) {
+        closeList();
+        currentParaLines.push(line);
+      } else {
+        closeList();
+        closePara();
+      }
+    } else {
+      closeList();
+      currentParaLines.push(line);
+    }
+  }
+  closeList();
+  closePara();
+  return blocks;
+}
+
+// ═══════════════════════════════════════════════════════
+//  ADD ENTRIES
+// ═══════════════════════════════════════════════════════
+function addNormal() {
+  const txt = document.getElementById('msg-normal').value;
+  const mediaRows = document.querySelectorAll('#media-list .media-input-row');
+  let mediaItems = [];
+  
+  mediaRows.forEach(row => {
+    const type = row.dataset.type;
+    const path = row.querySelector('.media-path').value.trim();
+    const defaultPath = type === 'img' ? 'other/memes/' : 'diary/';
+    if (path && path !== defaultPath) {
+      const item = { type: type, src: path };
+      if (type === 'img' || type === 'vid') {
+        item.size = row.querySelector('.media-size').value;
+      }
+      mediaItems.push(item);
+    }
+  });
+
+  const hasMedia = mediaItems.length > 0;
+  if (txt === '' && !hasMedia) return;
+  const sayer = getSayer('normal');
+  
+  let entry = {
+    sayer: sayer ? sayer.key : null
+  };
+
+  if (respondSource) {
+    entry.type = 'respond';
+    entry.source = { ...respondSource };
+    entry.replySayer = sayer ? sayer.key : null;
+    entry.replyText = txt;
+    if (hasMedia) entry.media = mediaItems;
+    clearResponseMode();
+  } else if (hasMedia && txt === '') {
+    entry.type = 'media';
+    entry.media = mediaItems;
+  } else if (hasMedia && txt !== '') {
+    entry.type = 'media';
+    entry.caption = txt;
+    entry.media = mediaItems;
+  } else {
+    entry.type = 'normal';
+    entry.text = txt;
+  }
+
+  entries.push(entry);
+  document.getElementById('msg-normal').value = '';
+  document.getElementById('media-list').innerHTML = ''; 
+  renderPreview();
+  updateOutput();
+}
+
+function addNarr() {
+  const txt = document.getElementById('msg-narr').value;
+  if (txt === '') return;
+  const blocks = parseNarrBlocks(txt);
+  const entry = { type: 'narr', blocks: blocks };
+  entries.push(entry);
+  document.getElementById('msg-narr').value = '';
+  renderPreview();
+  updateOutput();
+}
+
+function addReact() {
+  const txt = document.getElementById('msg-react').value;
+  if (txt === '') return;
+  const words = tokenizeForNarr(txt);
+  const entry = { type: 'react', text: txt, words: words };
+  entries.push(entry);
+  document.getElementById('msg-react').value = '';
+  renderPreview();
+  updateOutput();
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER PREVIEW
+// ═══════════════════════════════════════════════════════
+function renderMediaPreviewItems(mediaList, container, entryIdx) {
+  if (!mediaList) return;
+  mediaList.forEach(item => {
+    const wrap = document.createElement('div');
+    wrap.className = 'pickable-target';
+    wrap.style.marginTop = '4px';
+    wrap.style.display = 'block';
+    wrap.style.padding = '4px';
+    wrap.style.borderRadius = '4px';
+    
+    let mediaEl;
+    let icon;
+    let typeLabel = item.type === 'img' ? 'Image' : item.type === 'vid' ? 'Video' : 'Audio';
+
+    if (item.type === 'img') {
+      mediaEl = document.createElement('img');
+      mediaEl.src = item.src; 
+      mediaEl.alt = item.src;
+      mediaEl.className = item.size;
+      mediaEl.style.maxWidth = item.size === 'little' ? '19%' : item.size === 'medium' ? '50%' : '100%';
+      mediaEl.style.background = '#ccc'; 
+      mediaEl.style.display = 'block';
+      mediaEl.style.minWidth = '40px'; 
+      mediaEl.style.minHeight = '30px';
+      icon = '📷 ';
+    } else if (item.type === 'vid') {
+      mediaEl = document.createElement('video');
+      mediaEl.src = item.src;
+      mediaEl.controls = true;
+      mediaEl.className = item.size ? item.size : '';
+      mediaEl.style.maxWidth = item.size === 'little' ? '19%' : item.size === 'medium' ? '50%' : '100%';
+      mediaEl.style.display = 'block';
+      icon = '🎞️ ';
+    } else if (item.type === 'aud') {
+      mediaEl = document.createElement('audio');
+      mediaEl.src = item.src;
+      mediaEl.controls = true;
+      mediaEl.style.display = 'block';
+      mediaEl.style.width = '100%';
+      mediaEl.style.maxWidth = '300px';
+      icon = '🔊 ';
+    }
+
+    const fn = document.createElement('div');
+    fn.style.cssText = 'font-size:0.7rem;color:#888;font-family:monospace;margin-top:2px;pointer-events:none;';
+    let sizeInfo = item.size ? ` .${item.size}` : '';
+    fn.textContent = icon + item.src + sizeInfo;
+    
+    wrap.appendChild(mediaEl);
+    wrap.appendChild(fn);
+    
+    wrap.addEventListener('click', (e) => {
+      if ((item.type === 'vid' || item.type === 'aud') && e.target === mediaEl) {
+        return; // Don't interrupt play/pause clicks
+      }
+      activateResponseMode({ 
+        cls: '', 
+        label: '', 
+        text: `[${typeLabel}: ${item.src}]`, 
+        entryIdx: entryIdx,
+        isMedia: true,
+        mediaType: item.type,
+        mediaSrc: item.src,
+        mediaSize: item.size || ''
+      });
+    });
+    
+    container.appendChild(wrap);
+  });
+}
+
+function renderPreview() {
+  const preview = document.getElementById('preview');
+  preview.innerHTML = '';
+
+  entries.forEach((entry, idx) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'entry-wrap';
+    wrap.dataset.idx = idx;
+
+    if (entry.type === 'normal') {
+      wrap.dataset.mode = 'normal';
+      const sayer = entry.sayer ? SAYERS.find(s => s.key === entry.sayer) : null;
+      const cls = sayer ? sayer.cls : '';
+      const label = sayer ? sayer.label + ': ' : '';
+      
+      wrap.innerHTML = renderBlocks(entry.text, cls, label, false);
+
+      wrap.querySelectorAll('.pickable-target').forEach(el => {
+        el.addEventListener('click', () => {
+          let cleanTxt = el.innerText;
+          if (sayer && cleanTxt.startsWith(sayer.label + ': ')) {
+            cleanTxt = cleanTxt.substring(sayer.label.length + 2);
+          }
+          activateResponseMode({ cls: cls, label: sayer ? sayer.label : '', text: cleanTxt, entryIdx: idx });
+        });
+      });
+
+      const ctrl = makeControls(idx, ['sayer','delete'], entry);
+      wrap.appendChild(ctrl);
+
+    } else if (entry.type === 'narr') {
+      entry.blocks.forEach((block, bIdx) => {
+        if (block.type === 'p') {
+          const p = document.createElement('p');
+          p.className = 'narr';
+          let htmlLines = block.lines.map((lineTokens, lIdx) => {
+            return renderNarrWordsStructured(lineTokens, idx, bIdx, 'line', lIdx);
+          });
+          p.innerHTML = '*' + htmlLines.join('<br>') + '*';
+          wrap.appendChild(p);
+        } else if (block.type === 'ul' || block.type === 'ol') {
+          const listEl = document.createElement(block.type);
+          listEl.className = 'narr';
+          block.items.forEach((itemTokens, iIdx) => {
+            const li = document.createElement('li');
+            li.innerHTML = '*' + renderNarrWordsStructured(itemTokens, idx, bIdx, 'item', iIdx) + '*';
+            listEl.appendChild(li);
+          });
+          wrap.appendChild(listEl);
+        }
+      });
+      
+      const delBtn = document.createElement('button');
+      delBtn.className = 'ec-btn del';
+      delBtn.textContent = '✕';
+      delBtn.style.cssText = 'position: absolute; right: 2px; top: 50%; transform: translateY(-50%); display: none; z-index: 10;';
+      delBtn.onclick = (e) => { e.stopPropagation(); entries.splice(idx, 1); renderPreview(); };
+      wrap.appendChild(delBtn);
+
+      wrap.addEventListener('mouseenter', () => delBtn.style.display = 'block');
+      wrap.addEventListener('mouseleave', () => delBtn.style.display = 'none');
+
+    } else if (entry.type === 'react') {
+      const p = document.createElement('p');
+      p.className = 'react';
+      if (!entry.words) entry.words = tokenizeForNarr(entry.text);
+      p.innerHTML = renderNarrWordsStructured(entry.words, idx, 0, 'line', 0);
+      wrap.appendChild(p);
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'ec-btn del';
+      delBtn.textContent = '✕';
+      delBtn.style.cssText = 'position: absolute; right: 2px; top: 50%; transform: translateY(-50%); display: none; z-index: 10;';
+      delBtn.onclick = (e) => { e.stopPropagation(); entries.splice(idx, 1); renderPreview(); };
+      wrap.appendChild(delBtn);
+
+      wrap.addEventListener('mouseenter', () => delBtn.style.display = 'block');
+      wrap.addEventListener('mouseleave', () => delBtn.style.display = 'none');
+
+    } else if (entry.type === 'respond') {
+      wrap.innerHTML = '';
+      const div = document.createElement('div');
+      div.className = 'respond';
+      
+      const src = entry.source;
+      
+      const imgMatch = src.text ? src.text.match(/^\[Image:\s*(.*?)\]$/) : null;
+      const vidMatch = src.text ? src.text.match(/^\[Video:\s*(.*?)\]$/) : null;
+      const audMatch = src.text ? src.text.match(/^\[Audio:\s*(.*?)\]$/) : null;
+      
+      let pSrcWrapper;
+
+      if (src.isMedia || imgMatch || vidMatch || audMatch) {
+        pSrcWrapper = document.createElement('div');
+        pSrcWrapper.className = 'pickable-target';
+        pSrcWrapper.style.padding = '4px';
+        pSrcWrapper.style.background = 'rgba(0,0,0,0.05)';
+        pSrcWrapper.style.borderRadius = '4px';
+        pSrcWrapper.style.marginBottom = '4px';
+        
+        const respLabel = document.createElement('div');
+        respLabel.style.cssText = 'font-size: 0.75em; opacity: 0.5; margin-bottom: 2px; font-family: "textact"; color: black;';
+        respLabel.textContent = 'response to — ';
+        pSrcWrapper.appendChild(respLabel);
+        
+        let mediaEl;
+        
+        if (src.mediaType === 'img' || imgMatch) {
+            const path = src.mediaSrc || imgMatch[1];
+            mediaEl = document.createElement('img');
+            mediaEl.src = path;
+            const size = src.mediaSize;
+            mediaEl.style.maxWidth = size === 'little' ? '19%' : size === 'medium' ? '50%' : '100%';
+        } else if (src.mediaType === 'vid' || vidMatch) {
+            const path = src.mediaSrc || vidMatch[1];
+            mediaEl = document.createElement('video');
+            mediaEl.src = path;
+            mediaEl.controls = true;
+            const size = src.mediaSize;
+            mediaEl.style.maxWidth = size === 'little' ? '19%' : size === 'medium' ? '50%' : '100%';
+        } else if (src.mediaType === 'aud' || audMatch) {
+            const path = src.mediaSrc || audMatch[1];
+            mediaEl = document.createElement('audio');
+            mediaEl.src = path;
+            mediaEl.controls = true;
+            mediaEl.style.height = '30px'; 
+        }
+
+        if (mediaEl) {
+          mediaEl.className = 'resq';
+          mediaEl.style.display = 'block';
+          mediaEl.style.opacity = '0.7';
+          pSrcWrapper.appendChild(mediaEl);
+        }
+
+        pSrcWrapper.addEventListener('click', (e) => {
+           if (e.target === mediaEl && mediaEl.controls) return;
+           activateResponseMode(src);
+        });
+        
+        div.appendChild(pSrcWrapper);
+
+      } else {
+        const pSrc = document.createElement('p');
+        pSrc.className = (src.cls ? src.cls + ' ' : '') + 'resq pickable-target';
+        pSrc.textContent = (src.label ? src.label + ': ' : '') + src.text;
+        div.appendChild(pSrc);
+        pSrc.addEventListener('click', () => {
+          activateResponseMode(src);
+        });
+      }
+
+      const replySayer = entry.replySayer ? SAYERS.find(s => s.key === entry.replySayer) : null;
+      const repCls = replySayer ? replySayer.cls : '';
+      const repLabel = replySayer ? replySayer.label + ': ' : '';
+      
+      const replyContainer = document.createElement('div');
+      replyContainer.innerHTML = renderBlocks(entry.replyText, repCls, repLabel, false);
+      
+      while (replyContainer.firstChild) {
+        const el = replyContainer.firstChild;
+        if (el.nodeType === 1) {
+          el.addEventListener('click', () => {
+            let cleanTxt = el.innerText;
+            if (replySayer && cleanTxt.startsWith(replySayer.label + ': ')) {
+              cleanTxt = cleanTxt.substring(replySayer.label.length + 2);
+            }
+            activateResponseMode({ cls: repCls, label: replySayer ? replySayer.label : '', text: cleanTxt, entryIdx: idx });
+          });
+        }
+        div.appendChild(el);
+      }
+
+      renderMediaPreviewItems(entry.media, div, idx);
+      wrap.appendChild(div);
+
+      const ctrl = makeControls(idx, ['sayer', 'delete'], entry);
+      wrap.appendChild(ctrl);
+
+    } else if (entry.type === 'media') {
+      wrap.innerHTML = '';
+      const div = document.createElement('div');
+      div.className = 'medial';
+      const sayer = entry.sayer ? SAYERS.find(s => s.key === entry.sayer) : null;
+      const cls = sayer ? sayer.cls : '';
+      const label = sayer ? sayer.label + ': ' : '';
+
+      if (entry.caption) {
+        const captionContainer = document.createElement('div');
+        captionContainer.innerHTML = renderBlocks(entry.caption, cls, label, false);
+        while (captionContainer.firstChild) {
+          const el = captionContainer.firstChild;
+          if (el.nodeType === 1) {
+            el.addEventListener('click', () => {
+              let cleanTxt = el.innerText;
+              if (sayer && cleanTxt.startsWith(sayer.label + ': ')) {
+                cleanTxt = cleanTxt.substring(sayer.label.length + 2);
+              }
+              activateResponseMode({ cls: cls, label: sayer ? sayer.label : '', text: cleanTxt, entryIdx: idx });
+            });
+          }
+          div.appendChild(el);
+        }
+      }
+
+      renderMediaPreviewItems(entry.media, div, idx);
+      wrap.appendChild(div);
+
+      const ctrl = makeControls(idx, ['sayer', 'delete'], entry);
+      wrap.appendChild(ctrl);
+    }
+
+    preview.appendChild(wrap);
+  });
+
+  updateOutput();
+}
+
+function renderNarrWordsStructured(tokens, entryIdx, bIdx, subType, subIdx) {
+  return tokens.map((w, wi) => {
+    if (/^\s+$/.test(w)) return w;
+    if (typeof w === 'object' && w.cls) {
+      return `<span class="narr-word spanned ${w.cls}" data-entry="${entryIdx}" data-block="${bIdx}" data-subtype="${subType}" data-subidx="${subIdx}" data-word="${wi}" style="font-style:normal;">${w.text}</span>`;
+    }
+    const txt = typeof w === 'object' ? w.text : w;
+    return `<span class="narr-word" data-entry="${entryIdx}" data-block="${bIdx}" data-subtype="${subType}" data-subidx="${subIdx}" data-word="${wi}">${txt}</span>`;
+  }).join('');
+}
+
+function getPreviewColor(cls) {
+  const map = { cafe:'#4f0000', millis:'#104600', Lupi:'#2c58b0', rototi:'purple', Luca:'#252f73', elkrack:'#00606b', tronk:'#ff0000', mono:'#00570d', nardog:'#404040', faz:'#0000009d', Chiara:'pink', mart:'pink', san:'#000000' };
+  return map[cls] || '#333';
+}
+
+function makeControls(idx, types, entry) {
+  const ctrl = document.createElement('div');
+  ctrl.className = 'entry-controls';
+
+  if (types.includes('sayer')) {
+    const btn = document.createElement('button');
+    btn.className = 'ec-btn';
+    btn.textContent = 'sayer ▾';
+
+    const popup = document.createElement('div');
+    popup.className = 'sayer-popup';
+
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.className = 'sp-search';
+    searchInput.placeholder = 'search sayer…';
+    popup.appendChild(searchInput);
+
+    const scrollContainer = document.createElement('div');
+    scrollContainer.className = 'sp-scroll';
+    popup.appendChild(scrollContainer);
+
+    function applySayer(key) {
+      if (entry.type === 'respond') {
+        entry.replySayer = key;
+      } else {
+        entry.sayer = key;
+      }
+      popup.classList.remove('show');
+      searchInput.value = '';
+      renderPreview();
+    }
+
+    const noneOpt = document.createElement('div');
+    noneOpt.className = 'sp-opt';
+    noneOpt.textContent = '— none —';
+    noneOpt.style.color = '#777';
+    noneOpt.onclick = (e) => { e.stopPropagation(); applySayer(null); };
+    scrollContainer.appendChild(noneOpt);
+
+    SAYERS.forEach(s => {
+      const opt = document.createElement('div');
+      opt.className = 'sp-opt';
+      opt.textContent = s.label + ' — .' + s.cls;
+      opt.style.color = getPreviewColor(s.key);
+      opt.onclick = (e) => { e.stopPropagation(); applySayer(s.key); };
+      scrollContainer.appendChild(opt);
+    });
+
+    function filterOptions(query) {
+      const q = query.toLowerCase().trim();
+      noneOpt.style.display = (!q || 'none — none —'.includes(q)) ? 'block' : 'none';
+      SAYERS.forEach((s, i) => {
+        const optEl = scrollContainer.children[i + 1];
+        if (optEl) {
+          const matches = s.label.toLowerCase().includes(q) || s.cls.toLowerCase().includes(q);
+          optEl.style.display = matches ? 'block' : 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => { e.stopPropagation(); filterOptions(e.target.value); });
+    searchInput.addEventListener('keydown', (e) => {
+      e.stopPropagation();
+      if (e.key === 'Enter') {
+        const first = Array.from(scrollContainer.children).find(el => el.style.display !== 'none');
+        if (first) first.click();
+      }
+      if (e.key === 'Escape') { popup.classList.remove('show'); searchInput.value = ''; }
+    });
+
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const wasOpen = popup.classList.contains('show');
+      document.querySelectorAll('.sayer-popup.show').forEach(p => p.classList.remove('show'));
+      if (!wasOpen) {
+        filterOptions('');
+        popup.classList.add('show');
+        setTimeout(() => searchInput.focus(), 20);
+      }
+    };
+
+    ctrl.style.position = 'absolute';
+    ctrl.appendChild(btn);
+    ctrl.appendChild(popup);
+  }
+
+  if (types.includes('delete')) {
+    const del = document.createElement('button');
+    del.className = 'ec-btn del';
+    del.textContent = '✕';
+    del.onclick = (e) => { e.stopPropagation(); entries.splice(idx, 1); renderPreview(); };
+    ctrl.appendChild(del);
+  }
+
+  return ctrl;
+}
+
+// ═══════════════════════════════════════════════════════
+//  SEARCHABLE SPAN ASSIGNMENT POPUP ENGINE
+// ═══════════════════════════════════════════════════════
+function showWordPopup(e, el) {
+  const wsp = document.getElementById('wsp');
+  wsp.innerHTML = '';
+  
+  const title = document.createElement('div');
+  title.className = 'wsp-title';
+  title.textContent = 'assign class';
+  wsp.appendChild(title);
+
+  const entryIdx = parseInt(el.dataset.entry);
+  const entry = entries[entryIdx];
+  
+  let targetArray, wordIdx;
+
+  if (entry.type === 'react') {
+    wordIdx = parseInt(el.dataset.word);
+    targetArray = entry.words;
+  } else if (el.dataset.block !== undefined) {
+    const bIdx = parseInt(el.dataset.block);
+    const subType = el.dataset.subtype;
+    const subIdx = parseInt(el.dataset.subidx);
+    wordIdx = parseInt(el.dataset.word);
+    const block = entry.blocks[bIdx];
+    targetArray = (subType === 'line') ? block.lines[subIdx] : block.items[subIdx];
+  } else {
+    wordIdx = parseInt(el.dataset.word);
+    targetArray = entry.words;
+  }
+
+  const searchInput = document.createElement('input');
+  searchInput.type = 'text';
+  searchInput.placeholder = 'Search sayer character...';
+  searchInput.style.cssText = 'width: calc(100% - 8px); margin: 4px; padding: 6px; font-family: monospace; font-size: 0.72rem; background: #1a1a1a; color: #e0e0e0; border: 1px solid #333; outline: none;';
+  wsp.appendChild(searchInput);
+
+  const scrollContainer = document.createElement('div');
+  scrollContainer.style.cssText = 'max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 2px;';
+  wsp.appendChild(scrollContainer);
+
+  searchInput.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter') {
+      ev.preventDefault();
+      const firstOpt = scrollContainer.querySelector('.wsp-opt');
+      if (firstOpt) {
+        firstOpt.click();
+      }
+    }
+  });
+
+  function rebuildFilteredOptions(query) {
+    scrollContainer.innerHTML = '';
+    const cleanQuery = query.toLowerCase().trim();
+
+    if (typeof targetArray[wordIdx] === 'object' && targetArray[wordIdx].cls) {
+      if (!cleanQuery || 'remove span'.includes(cleanQuery)) {
+        const rem = document.createElement('div');
+        rem.className = 'wsp-opt';
+        rem.textContent = '✕ remove span';
+        rem.style.color = '#f88';
+        rem.onclick = () => {
+          targetArray[wordIdx] = targetArray[wordIdx].text;
+          wsp.classList.remove('show');
+          renderPreview();
+        };
+        scrollContainer.appendChild(rem);
+      }
+    }
+
+    SAYERS.forEach(s => {
+      if (!cleanQuery || s.label.toLowerCase().includes(cleanQuery) || s.cls.toLowerCase().includes(cleanQuery)) {
+        const opt = document.createElement('div');
+        opt.className = 'wsp-opt';
+        opt.style.color = getPreviewColor(s.key);
+        opt.textContent = s.label + ' — .' + s.cls;
+        opt.onclick = () => {
+          const txt = typeof targetArray[wordIdx] === 'object' ? targetArray[wordIdx].text : targetArray[wordIdx];
+          targetArray[wordIdx] = { text: txt, cls: s.key };
+          wsp.classList.remove('show');
+          renderPreview();
+        };
+        scrollContainer.appendChild(opt);
+      }
+    });
+  }
+
+  rebuildFilteredOptions('');
+  searchInput.addEventListener('input', (ev) => rebuildFilteredOptions(ev.target.value));
+
+  wsp.style.left = Math.max(10, Math.min(e.clientX, window.innerWidth - 180)) + 'px';
+  wsp.style.top = Math.max(10, Math.min(e.clientY + 4, window.innerHeight - 280)) + 'px';
+  wsp.classList.add('show');
+
+  setTimeout(() => searchInput.focus(), 30);
+}
+
+// ═══════════════════════════════════════════════════════
+//  GENERATE HTML OUTPUT
+// ═══════════════════════════════════════════════════════
+function generateMediaOutput(mediaList, indent) {
+  let out = '';
+  if (!mediaList) return out;
+  mediaList.forEach(item => {
+    if (item.type === 'img') {
+      const szCls = item.size ? ` class="${item.size}"` : '';
+      out += indent + `<img src="${item.src}"${szCls}>\n`;
+    } else if (item.type === 'vid') {
+      const szCls = item.size ? ` class="${item.size}"` : '';
+      out += indent + `<video src="${item.src}"${szCls} controls></video>\n`;
+    } else if (item.type === 'aud') {
+      out += indent + `<audio src="${item.src}" controls></audio>\n`;
+    }
+  });
+  return out;
+}
+
+function updateOutput() {
+  const html = generateHTML();
+  document.getElementById('output').textContent = html;
+}
+
+function generateHTML() {
+  const indent = '  ';
+  let inner = '';
+
+  entries.forEach(entry => {
+    if (entry.type === 'normal') {
+      const sayer = entry.sayer ? SAYERS.find(s => s.key === entry.sayer) : null;
+      const cls = sayer ? sayer.cls : '';
+      const label = sayer ? sayer.label + ': ' : '';
+      
+      const blocksHtml = renderBlocks(entry.text, cls, label, true);
+      const indentedBlocks = blocksHtml.split('\n').filter(l => l.trim() !== '').map(l => indent + l).join('\n') + '\n';
+      inner += indentedBlocks;
+
+    } else if (entry.type === 'narr') {
+      entry.blocks.forEach(block => {
+        if (block.type === 'p') {
+          let htmlLines = block.lines.map(lineTokens => {
+            return lineTokens.map(w => {
+              if (/^\s+$/.test(typeof w === 'string' ? w : w.text)) return typeof w === 'string' ? w : w.text;
+              if (typeof w === 'object' && w.cls) {
+                return `<span class="${w.cls}">${escHtml(w.text)}</span>`;
+              }
+              return escHtml(typeof w === 'string' ? w : w.text);
+            }).join('');
+          });
+          inner += indent + `<p class="narr">*${htmlLines.join('<br>')}*</p>\n`;
+        } else if (block.type === 'ul' || block.type === 'ol') {
+          inner += indent + `<${block.type} class="narr">\n`;
+          block.items.forEach(itemTokens => {
+            let itemContent = itemTokens.map(w => {
+              if (/^\s+$/.test(typeof w === 'string' ? w : w.text)) return typeof w === 'string' ? w : w.text;
+              if (typeof w === 'object' && w.cls) {
+                return `<span class="${w.cls}">${escHtml(w.text)}</span>`;
+              }
+              return escHtml(typeof w === 'string' ? w : w.text);
+            }).join('');
+            inner += indent + indent + `<li>*${itemContent}*</li>\n`;
+          });
+          inner += indent + `</${block.type}>\n`;
+        }
+      });
+
+    } else if (entry.type === 'react') {
+      const words = entry.words || tokenizeForNarr(entry.text);
+      const content = words.map(w => {
+        if (/^\s+$/.test(typeof w === 'string' ? w : w.text)) return typeof w === 'string' ? w : w.text;
+        if (typeof w === 'object' && w.cls) {
+          return `<span class="${w.cls}">${escHtml(w.text)}</span>`;
+        }
+        return escHtml(typeof w === 'string' ? w : w.text);
+      }).join('');
+      inner += indent + `<p class="react">${content}</p>\n`;
+
+    } else if (entry.type === 'respond') {
+      const src = entry.source;
+      const replySayer = entry.replySayer ? SAYERS.find(s => s.key === entry.replySayer) : null;
+      const srcCls = src.cls ? src.cls + ' resq' : 'resq';
+      const srcLabel = src.label ? src.label + ': ' : '';
+      const repCls = replySayer ? replySayer.cls : '';
+      const repLabel = replySayer ? replySayer.label + ': ' : '';
+      
+      inner += indent + `<div class="respond">\n`;
+
+      if (src.isMedia) {
+        const szCls = src.mediaSize ? src.mediaSize + ' resq' : 'resq';
+        if (src.mediaType === 'img') {
+          inner += indent + indent + `<img src="${src.mediaSrc}" class="${szCls}">\n`;
+        } else if (src.mediaType === 'vid') {
+          inner += indent + indent + `<video src="${src.mediaSrc}" class="${szCls}" controls></video>\n`;
+        } else if (src.mediaType === 'aud') {
+          inner += indent + indent + `<audio src="${src.mediaSrc}" class="resq" controls></audio>\n`;
+        }
+      } else {
+        const imgMatch = src.text ? src.text.match(/^\[Image:\s*(.*?)\]$/) : null;
+        const vidMatch = src.text ? src.text.match(/^\[Video:\s*(.*?)\]$/) : null;
+        const audMatch = src.text ? src.text.match(/^\[Audio:\s*(.*?)\]$/) : null;
+        
+        if (imgMatch) {
+          inner += indent + indent + `<img src="${imgMatch[1]}" class="resq">\n`;
+        } else if (vidMatch) {
+          inner += indent + indent + `<video src="${vidMatch[1]}" class="resq" controls></video>\n`;
+        } else if (audMatch) {
+          inner += indent + indent + `<audio src="${audMatch[1]}" class="resq" controls></audio>\n`;
+        } else {
+          inner += indent + indent + `<p class="${srcCls}">${srcLabel}${escHtml(src.text)}</p>\n`;
+        }
+      }
+      
+      if (entry.replyText && entry.replyText !== '') {
+        const replyBlocksHtml = renderBlocks(entry.replyText, repCls, repLabel, true);
+        const indentedReply = replyBlocksHtml.split('\n').filter(l => l.trim() !== '').map(l => indent + indent + l).join('\n') + '\n';
+        inner += indentedReply;
+      }
+      
+      inner += generateMediaOutput(entry.media, indent + indent);
+      inner += indent + `</div>\n`;
+
+    } else if (entry.type === 'media') {
+      const sayer = entry.sayer ? SAYERS.find(s => s.key === entry.sayer) : null;
+      inner += indent + `<div class="medial">\n`;
+      if (entry.caption) {
+        const cls = sayer ? sayer.cls : '';
+        const label = sayer ? sayer.label + ': ' : '';
+        const captionBlocksHtml = renderBlocks(entry.caption, cls, label, true);
+        const indentedCaption = captionBlocksHtml.split('\n').filter(l => l.trim() !== '').map(l => indent + indent + l).join('\n') + '\n';
+        inner += indentedCaption;
+      }
+      
+      inner += generateMediaOutput(entry.media, indent + indent);
+      inner += indent + `</div>\n`;
+    }
+  });
+
+  const lcArr = ['logtainer', ...Array.from(selectedLCs)];
+  const lcStr = lcArr.join(' ');
+
+  return (
+`<div class="${lcStr}">
+  <span class="textbutt"><b>TextLog</b></span>
+  <div class="textlog">
+${inner}  </div>
+</div>`
+  );
+}
+/*
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+*/
+function getSayer(mode) {
+  const k = selectedSayers[mode];
+  return k ? SAYERS.find(s => s.key === k) : null;
+}
+
+function generateLogtainer() {
+  updateOutput();
+  document.getElementById('output-wrap').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyOutput() {
+  const txt = document.getElementById('output').textContent;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btns = document.querySelectorAll('.copy-btn');
+    btns.forEach(b => { const old = b.textContent; b.textContent = 'copied!'; setTimeout(() => b.textContent = old, 1200); });
+  });
+}
+
+function clearAll() {
+  if (!confirm('Clear all entries?')) return;
+  entries = [];
+  clearResponseMode();
+  renderPreview();
+  updateOutput();
+}
+
+init();
+</script>
+</body>
+</html>

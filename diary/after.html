@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/jpg" href="img/awesome.jpg">
+    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <title>after/intro</title>
+    <header class="header">
+      <div style="height: 5px;" class="only-computers"></div>
+      <br class="only-phones">
+      <button id="toggleButton" onclick="controlPad()">Hide</button>
+      <div id="navContainer" class="moved-navcontainer">
+        <nav class="controlP">
+          <b>Control Pad</b>
+          <br>
+          <br>
+          <a class="ni" href="after.html">After</a>
+          <a class="ni" href="page1.html">Timothy's Diary</a>
+          <a class="ni" href="individuals.html">Individuals</a>
+          <a class="ni" href="voiceBag.html">voiceBag</a>
+          <a class="ni" href="say.html">say</a>
+        </nav>
+      </div>
+    </header>
+    <style>
+      
+      @media (mac-width: 877px) {
+        .boxy{
+          width: 100%;
+        }
+      }
+      @keyframes flash {
+          0% {
+              transform: scale(1);
+          }
+
+          100% {
+              transform: scale(1.5);
+          }
+      }
+      #flashtext {
+          font-size: 24px;
+          font-weight: bold;
+          animation: flash 0.5s infinite alternate;
+          display: inline-block;
+          transform-origin: center left;
+      }
+      @keyframes checkitout {
+          0% {
+              opacity: 0%;
+          }
+
+          100% {
+              opacity: 100%;;
+          }
+      }
+
+      #checkitout {
+          font-size: 24px;
+          font-weight: bold;
+          animation: checkitout 0.1s infinite alternate;
+          color: pink;
+          text-decoration: none;
+      }
+      #text {
+          font-family: monospace;
+          white-space: nowrap;
+          font-size: 37px;
+      }
+
+    </style>
+  </head>
+  <body style="background-color:grey">
+    <center>
+        <h1 style="color: blanchedalmond;">after</h1>
+        <br>
+        
+        <button id="changethething" class="gbuttons" onclick="appearItAll()">Click This!!!</button>
+    </center>
+    <div class="info">
+      
+    </div>
+    <span id="showhide" style="display: none;">
+        <div style="
+        background-color:midnightblue;
+        border: 5px dashed firebrick;
+        color: rgb(234, 105, 105);
+        padding: 5%px;
+        border-top-right-radius: 50%;
+        width: 50%;
+        float: left;
+        padding: 10px;
+          ">
+          <h3 style="color:pink;">Back at it again</h3>
+          <div style="width: 80%;">
+            <p>Ever since the last event in the chronicle, a lot of stuff has happened. I went to the US, to Finland, to the Neatherlands, I applied to university, and learned the basics of french, I learned a lot of math, I did shrooms, and much much more. But all of that happened during what I will be calling the timeskip. A jump in time from 14/06/2024 to 09/03/2025 where I took a break from writing entries in this website.</p>
+          </div>
+          <p>But now i'm back at it again. Welcome to</p>
+          <h3 id="flashtext">My Diary</h3>
+          <ul>
+            <li>New Locations!!!</li>
+            <li>New Events!!!</li>
+            <li>New Characters!!! (Old characters also [no one died{yet}])</li>
+            <li>New stories!!!!</li>
+            <li>Includes JavaScript!!</li>
+            <li>Now in first person!!!</li>
+            <li><a id="checkitout" href="page1.html">Check it out by clicking here!!!</a></li>
+            <li>Or use the control pad by hovering on the top of the screen :)</li>
+          </ul>
+        </div>
+    </span>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="boxy" style="background-color: grey; border: 15px dashed yellow; padding: 9px; width: 80%;">
+      <button id="startButton" style="background: none; font-size: 26px; float: left;">Oh wow</button><span>. click this</span>
+      <p id="text" style="word-wrap: break-word; white-space: normal;"></p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>This is <a href="words.html#Acrimony">Acrimonious</a></p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="background-color: blanchedalmond;">
+      <p>It's the first day in a long time where I literally have no good news, I mean I guess tomorrow it's Lara's birthday and I guess there is always next week. I should have drop-kicked that little girl so hard.</p>
+    </div>
+    <br>
+    <div>
+      <p>Life is funny</p>
+      <p>Skies are sunny</p>
+      <p>Bees make honney</p>
+      <p>Who needs money</p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="fontext" id="fontext">
+      <h3>textKinds</h3>
+      <p class="cafe">Timo: The quick brown dog jumps over the lazy red fox </p>
+      <p class="elkrack">Raz: The quick brown dog jumps over the lazy red fox </p>      
+      <p class="Lupi">Lupi: The quick brown dog jumps over the lazy red fox </p>      
+      <p class="dFan">Chad: The quick brown dog jumps over the lazy red fox</p>
+      <p class="tronk">Dani: The quick brown dog jumps over the lazy red fox </p>      
+      <p class="alex">Alex: The quick brown dog jumps over the lazy red fox</p>     
+      <p class="nata">Nata: The quick brown dog jumps over the lazy red fox</p>
+      <p class="rototi">Fede: The quick brown dog jumps over the lazy red fox </p>
+      <p class="yungx">Sebs: The quick brown dog jumps over the lazy red fox </p>
+      <p class="Luca">Luca: The quick brown dog jumps over the lazy red fox </p>
+      <p class="Chiara">Chiara: The quick brown dog jumps over the lazy red fox</p>
+      <p class="mart">Martina: The quick brown dog jumps over the lazy red fox </p>
+      <p class="faz">Fabri: The quick brown dog jumps over the lazy red fox</p>      
+      <p class="m3Again">Megan: The quick brown dog jumps over the lazy red fox </p>
+      <p class="nardog">Bruno: The quick brown dog jumps over the lazy red fox </p>
+      <p class="millis">Milla: The quick brown dog jumps over the lazy red fox</p> 
+      <p class="mono">Lucas: The quick brown dog jumps over the lazy red fox </p>
+      <p class="san">san: The quick brown dog jumps over the lazy red fox</p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>\[\lim_{x \to 7} f(x) = \lim_{x \to 7} x = 7\]</p>
+    <br>
+    <br>
+    <table class="moron" id="moron">
+      <tr>
+        <td>Moron</td>
+        <td>MORE ON</td>
+      </tr>
+    </table>
+    <button onclick="boron()">Boron</button>
+    <div>Icons made from <a href="https://www.onlinewebfonts.com/icon">svg icons</a>is licensed by CC BY 4.0</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div data-v-acd9c854="" data-v-e350e042="" data-v-3e03fee5="" class="captcha-container"><div data-v-acd9c854="" class="captcha-title">
+    Engage in a
+    <div data-v-acd9c854="" class="captcha-title-type">Conversation</div></div> <div data-v-acd9c854="" class="captcha-content-wrapper"><div data-v-e350e042="" data-v-acd9c854="" class="chat-container"><div data-v-e350e042="" data-v-acd9c854="" class="confidence-meter"><div data-v-e350e042="" data-v-acd9c854="" class="meter-label">
+        Human Confidence Level: <b data-v-e350e042="" data-v-acd9c854="">95%</b></div> <div data-v-e350e042="" data-v-acd9c854="" class="meter-bar"><div data-v-e350e042="" data-v-acd9c854="" class="meter-fill" style="width: 95%;"></div></div></div> <div data-v-e350e042="" data-v-acd9c854="" class="chat-messages"><div data-v-e350e042="" data-v-acd9c854="" class="chat-message user-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">Are you a robot</div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message ai-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">I'm a conversational AI, but that's not really the question here, is it? </div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message user-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">What is the question smart guy... or I mean, conversational AI??</div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message ai-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">The question is whether you're a human, and your cheeky response suggests you might be. </div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message user-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">Do cheeky responses correspond to some humanity-meter that I am not aware of??</div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message ai-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">You're poking fun at the idea, and that kind of self-aware humor is a pretty human trait. </div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message user-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">Do you think a robot could believe it is a human, and be convinced of this fact?</div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message ai-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">A philosophical question! A robot could potentially be programmed to convincingly mimic human-like delusions, but that's a rather nuanced and thoughtful inquiry. </div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message user-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">What if that is me? I need to pass this test, I need to prove this to myself</div></div></div><div data-v-e350e042="" data-v-acd9c854="" class="chat-message ai-message"><div data-v-e350e042="" data-v-acd9c854="" class="message-content"><div data-v-e350e042="" data-v-acd9c854="" class="message-text">You are human.</div></div></div> <!----></div> <!----></div></div> <div data-v-acd9c854="" class="captcha-controls"><img data-v-acd9c854="" src="/not-a-robot/refresh.svg" class="captcha-refresh"> <button data-v-acd9c854="" id="captcha-verify-button" class="verify-button">
+      Verify
+    </button></div></div>
+    https://neal.fun/not-a-robot/
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="border: 2px sold green; background-image: -moz-linear-gradient(rgb(0, 56, 0), rgb(0, 0, 63)); color: white;">
+      <p>After several interactions, questionaires, primary, and secondary evidence to back up this claim, it is safe to say that Ethan dislikes two individuals that go by the name of "Fede" and "Sofe". The reason behind this contempt is varied, but it mostly stems from everyone's beliefs in the current Palestine-Israel situation going on in the middle of the east. Ethan is Jewish, and Jewish people tend to be on Israel's side. Fede and Sofe are not jewish, and they are not on Israel's side. And they are not afraid about talking very directly about their opinions. So that's the origin of this whole problem.</p>
+      <p>I naturally don't appreciate the fact that my friends dislike each other so I might sometimes bring up Sofe and Fede to Ethan to gauge weather or not his opinion on them has changed, and maybe sometimes to even change his opinion. I've also tried this with Sofe and Fede, but it's futile. Sometimes I actually feel like im making it worst.</p>
+      <p>All of those are part of what I love to call "THE TRIANGLE OF HATE" because they all hate each other for one reason or the other. The worst part is that literally all of them have fundamentally the same opinions, like, racism is bad, pro-life movement is wrong, their all fine with lgbt people. I mean sure Ethan might disagree with a current political conflict in the other side of the planet. It's just so sad to see 3 people that could have probably been great friends just turn into enemies.</p>
+      <p>Every time I think about this I think of ways I could have prevented any of this, but I truly couldn't, I wasn't there the day Ethan and Sofe had a discussion in lunch, and I literally have no idea to this day why Sofe and Fede hate each other so much. I know it's futile, the only way they could possibly all become friends right now is if they were trapped and forced to work together to survive, but that only happens in movies really, and I wouldn't really do that to them obviously :p</p>
+      <p>It's a message from the old man in the see, touph times build strong bonds. But yeah, I think this triangle of hate perfectly encapsulates everything wrong in this world, miscomunication and differences in opinion can cause hate between people, causing them to see only the worst parts of everyone else. Anyways I should go to bed its 1:37, check out Bruno's Songs in this website, see you later...crocodile</p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- modify this form HTML and place wherever you want your form -->
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+   
+    <!--<center>
+      <h1>title</h1>
+      <br>
+      <button id="change" onclick="toggleText()">Show</button>
+    </center>
+    <span id="sh" style="display: none;">
+      <p>This text changes</p>
+    </span>
+    <h1>Please just work</h1>
+
+
+    <button onclick="changethatShit()"></button>
+    <p id="texst">Lookatthis beach</p>
+    <br>-->
+  </body>
+  <script src="goofy.js"></script>
+  <script>
+    function appearItAll() {
+        document.getElementById('showhide').style.display = 'block';
+        document.getElementById('changethething').innerHTML = "Hide";
+        var element = document.getElementById('showhide');
+        element.id = "hideshow";
+        document.getElementById('changethething').onclick = disappearItAll;
+      }
+
+      function disappearItAll() {
+        document.getElementById('hideshow').style.display = 'none';
+        document.getElementById('changethething').innerHTML = "Show";
+        var element = document.getElementById('hideshow');
+        element.id = "showhide";
+        document.getElementById('changethething').onclick = appearItAll;
+      }
+
+      function toggleText() {
+        let textElement = document.getElementById('sh');
+        let button = document.getElementById('change');
+
+        if (textElement.style.display === "none") {
+          textElement.style.display = "block";
+          button.innerHTML = "Hide";
+        }
+        else {
+          textElement.style.display = "none";
+          button.innerHTML = "Show";
+        }
+      }
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="script.js"></script>
+</html>
