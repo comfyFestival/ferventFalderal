@@ -7575,11 +7575,209 @@
     "word": "rostulate",
     "definitions": [
       {
-        "text": "emm, tomar cafe con leche de almendras",
+        "text": "emmmmmmm, tomar cafe con leche de almendras",
         "type": "definition"
       },
       {
         "text": "El otro dia, Ethan rostulated someone con su alient",
+        "type": "example"
+      }
+    ],
+    "category": "use-full"
+  },
+  {
+    "word": "Stochastic",
+    "definitions": [
+      {
+        "text": "random; chance; involving probability; opposite of deterministic.",
+        "type": "definition"
+      },
+      {
+        "text": "Lucas has a very stochastic replying schedule",
+        "type": "example"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Acerbic",
+    "definitions": [
+      {
+        "text": "Sour or bitter.\nSarcastic or cynical.\nSharp-tempered.",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Cellophane",
+    "definitions": [
+      {
+        "text": "A thin, flexible, transparent cellulose material made from wood pulp and used as a moistureproof wrapping.\nPlastic wrap.",
+        "type": "definition"
+      }
+    ],
+    "category": "HOMESTUCK"
+  },
+  {
+    "word": "Prurient",
+    "definitions": [
+      {
+        "text": "Characterized by an inordinate interest in sex.",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Cajole",
+    "definitions": [
+      {
+        "text": "To persuade by flattery, gentle pleading, or insincere language",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Inveigh",
+    "definitions": [
+      {
+        "text": "speak against in an impassioned manner",
+        "type": "definition"
+      },
+      {
+        "text": "complain bitterly",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Invective",
+    "definitions": [
+      {
+        "text": "An expression which inveighs or rails against a person",
+        "type": "definition"
+      },
+      {
+        "text": "A severe or violent censure or reproach.",
+        "type": "definition"
+      },
+      {
+        "text": "Something spoken or written, intended to cast opprobrium, censure, or reproach on another",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Reproach",
+    "definitions": [
+      {
+        "text": "An expression of blame or disapproval; a rebuke",
+        "type": "definition"
+      },
+      {
+        "text": "Blame or disapproval",
+        "type": "definition"
+      },
+      {
+        "text": "One that stands as a rebuke or blame",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Transitorily",
+    "definitions": [
+      {
+        "text": "for a very brief time",
+        "type": "definition"
+      }
+    ],
+    "category": "HOMESTUCK"
+  },
+  {
+    "word": "Empalagous",
+    "definitions": [
+      {
+        "text": "Adjective for something too sweet. Something that causes discomfort in your throat or mouth in general because of it's sweetness",
+        "type": "definition"
+      }
+    ],
+    "category": "cosmilk"
+  },
+  {
+    "word": "Veneer",
+    "definitions": [
+      {
+        "text": "A veneer is a thin layer or decorative facing applied to a surface. It is primarily used to cover cheaper or less attractive materials to create a fine finish, and to improve appearance or conceal underlying defects.",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Veering",
+    "definitions": [
+      {
+        "text": "Veering refers to a sudden or significant change in direction, course, or position. It is commonly used to describe the erratic movement of vehicles, a shift in the wind, or even a change in the topic of a conversation",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Motley",
+    "definitions": [
+      {
+        "text": "Motley is an adjective used to describe a diverse, incongruous, or mismatched collection of people, things, or colors that seem to clash but make up a whole.",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Beset",
+    "definitions": [
+      {
+        "text": "Beset es un verbo en inglés (cuyas formas son beset en pasado y participio) que significa acosar, rodear, asediar o estar plagado de problemas. Se utiliza principalmente para describir situaciones en las que alguien o algo es atacado o afectado persistentemente por dificultades.",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Boilerplate",
+    "definitions": [
+      {
+        "text": "Boilerplate refers to standardized, reusable text or code that can be copied and used multiple times across different contexts without major alterations",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Interlocution",
+    "definitions": [
+      {
+        "text": "Interlocution refers to a formal or structured exchange of spoken words, dialogue, or conversation between two or more people. It also has a secondary use in the legal field to describe a preliminary, intermediate court decree made before a final decision",
+        "type": "definition"
+      }
+    ],
+    "category": "regular"
+  },
+  {
+    "word": "Constraneous",
+    "definitions": [
+      {
+        "text": "When someone is constrantated on what they are doing",
+        "type": "definition"
+      },
+      {
+        "text": "I was constraneous en lo que estaba doing, but I got distracted by a flying hotdog.",
         "type": "example"
       }
     ],
