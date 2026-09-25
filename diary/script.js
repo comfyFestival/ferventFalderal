@@ -397,7 +397,7 @@ function calcPsych() {
       change = psychFormula(change, q, t);
       change = change - cur
     }
-    const perPerson = Math.min((cur/2)+change, 12.327);
+    const perPerson = Math.min((cur)+change, 12.327);
     total += perPerson * people;
   }
   return Math.max(total, 0);
@@ -1115,3 +1115,5 @@ function toggleEntry(el) {
   el.classList.toggle('actile');
   el.classList.toggle('actileA');
 }
+
+
