@@ -2629,7 +2629,19 @@ text-shadow:
   margin-bottom: 12px;
 }
 
-.addloss-event-row label {
+.freedom-loss-event-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+  padding: 16px;
+  border: 1px solid rgba(91,143,168,0.25);
+  background: rgba(91,143,168,0.04);
+  margin-bottom: 12px;
+}
+
+.addloss-event-row label,
+.freedom-loss-event-row label {
   display: block;
   font-size: 0.7rem;
   opacity: 0.6;
