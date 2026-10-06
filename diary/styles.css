@@ -3,6 +3,15 @@
   --light-info:#c5c5c5;
 }
 
+.combo{
+  --shadow: #9A9A9A;
+  display: inline;
+  font-weight: 400;
+  font-family: 'fontstuck';
+  font-size: 2em;
+  text-shadow: 0 0 var(--shadow), 1px 1px var(--shadow), 2px 2px var(--shadow), 3px 3px var(--shadow), 4px 4px var(--shadow), 5px 5px var(--shadow), 6px 6px var(--shadow);
+  animation: flicker 150ms linear infinite;
+}
 
 
 body{
@@ -3391,6 +3400,10 @@ text-shadow:
   animation: act 0.05s infinite alternate;
   color: #0000EE;
 }
+.actile::after {
+  content: "\A";
+  white-space: pre;
+}
 
 .actileA{
   cursor: pointer;
@@ -3587,6 +3600,22 @@ table.bingo-card td.crost {
   letter-spacing: 0.05em;
 }
 
+table.bingo-card td.impos {
+  font-family: 'Courier Prime', monospace;
+  font-size: clamp(0.52rem, 1.8vw, 0.78rem);
+  background: red;
+  color: black;
+  letter-spacing: 0.05em;
+  animation: immposible 1s infinite alternate;
+}
+
+table.bingo-card td.nest {
+  font-family: 'Courier Prime', monospace;
+  font-size: clamp(0.52rem, 1.8vw, 0.78rem);
+  background: red;
+  color: black;
+}
+
 table.bingo-card td.crostN {
   font-family: 'Courier Prime', monospace;
   font-size: clamp(0.52rem, 1.8vw, 0.78rem);
@@ -3602,6 +3631,11 @@ table.bingo-card td.crostN {
   100%  { color: white; background: #111;}
 }
 
+@keyframes immposible {
+  0%   { background: red;}
+  50%  { background: red;}
+  100%  {background-color: #ff6c6c;}
+}
 
 
 @media (max-width: 768px) {

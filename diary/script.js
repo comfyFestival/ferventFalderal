@@ -928,5 +928,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
+
+  document.querySelectorAll('.logtainer').forEach(container => {
+    const button = container.querySelector('.textbutt');
+    const log = container.querySelector('.textlog');
   
+    button.addEventListener('click', () => {
+      log.style.display = (log.style.display === 'block') ? 'none' : 'block';
+    });
+  });
+  
+  function toggleEntry(el) {
+    const entry = el.closest('.mevent').querySelector('.antry');
+    entry.classList.toggle('visible');
+    el.classList.toggle('actile');
+    el.classList.toggle('actileA');
+  }
   
