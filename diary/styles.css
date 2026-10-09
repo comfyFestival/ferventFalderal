@@ -1879,6 +1879,35 @@ text-shadow:
   text-decoration: none;
   padding: 3.79px;
 }
+
+/* ---------- click-to-load media ---------- */
+
+/* Hide the media boxes (oneth, half, third, ...) and chat media until opened.
+   Because they are hidden from the first paint, nothing can shift the page when they load. */
+.img > div:not(.lazy-open),
+.medial :is(img, video, audio, iframe):not(.lazy-open) {
+  display: none;
+}
+
+.lazy-btn {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;          /* easy to tap on phones */
+  margin: 6px 0;
+  padding: 12px 16px;
+  font: inherit;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px dashed currentColor;
+  border-radius: 10px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.lazy-btn:hover { background: rgba(255, 255, 255, 0.85); }
+.medial .lazy-btn { width: auto; }
+
 .img{  
   border:12px solid white;
   border-style:ridge groove groove ridge ;

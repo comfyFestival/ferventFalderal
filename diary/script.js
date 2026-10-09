@@ -944,4 +944,40 @@ document.addEventListener('DOMContentLoaded', function() {
     el.classList.toggle('actile');
     el.classList.toggle('actileA');
   }
+
+  // ---------- click-to-load media ----------
+function setupLazyMedia() {
+  document.querySelectorAll('.img, .medial').forEach(function (group) {
+    var media = group.querySelectorAll('img, video, audio, iframe');
+    if (!media.length) return;
+
+    // What gets revealed: the media boxes inside .img, or the media elements themselves in .medial
+    var boxes = group.classList.contains('img')
+      ? Array.from(group.children).filter(function (c) { return c.tagName === 'DIV'; })
+      : Array.from(media);
+    if (!boxes.length) return;
+
+    // Button label, e.g. "🖼️ Show 3 images" / "🎬 Show video" / "🎧 Show audio"
+    var first = media[0].tagName.toLowerCase();
+    var icon = first === 'audio' ? '🎧' : (first === 'video' || first === 'iframe') ? '🎬' : '🖼️';
+    var noun = first === 'audio' ? 'audio' : (first === 'video' || first === 'iframe') ? 'video' : 'image';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'lazy-btn';
+    btn.textContent = icon + ' Show ' + (media.length > 1 ? media.length + ' items' : noun);
+
+    btn.addEventListener('click', function () {
+      boxes.forEach(function (b) { b.classList.add('lazy-open'); });
+      btn.remove();
+    });
+
+    boxes[0].parentNode.insertBefore(btn, boxes[0]);
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupLazyMedia);
+} else {
+  setupLazyMedia();
+}
   
