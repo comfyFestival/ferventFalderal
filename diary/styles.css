@@ -432,6 +432,15 @@ body{
   display: block;
 }
 
+.cist{
+  font-family:'Cistercian'
+}
+
+@font-face {
+  font-family: 'Cistercian';
+  src: url('font/Cistercian.ttf') format('truetype');
+}
+
 @font-face {
   font-family: 'timoKind';
   src: url('font/timoKind.ttf') format('truetype');
@@ -711,6 +720,20 @@ text-shadow:
   color:#4f0000;
   font-family: 'timoKind';
   font-size: 1.55rem;
+  text-shadow:
+   0px 0px 0.7px #eedb9d,
+   0px 0px 0.7px #eedb9d,
+   0px 0px 0.7px #eedb9d, 
+   0px 0px 0.7px #eedb9d, 
+   0px 0px 0.7px #eedb9d, 
+   0px 0px 0.7px #eedb9d, 
+   0px 0px 0.7px #eedb9d, 
+   0px 0px 0.7px #4f0000, 
+   0px 0px 0.7px #eedb9d;
+}
+
+.diac{
+  color:#4f0000;
   text-shadow:
    0px 0px 0.7px #eedb9d,
    0px 0px 0.7px #eedb9d,
