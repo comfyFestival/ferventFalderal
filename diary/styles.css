@@ -1908,7 +1908,7 @@ text-shadow:
 /* Hide the media boxes (oneth, half, third, ...) and chat media until opened.
    Because they are hidden from the first paint, nothing can shift the page when they load. */
 .img > div:not(.lazy-open),
-.medial :is(img, video, audio, iframe):not(.lazy-open) {
+.medial :is(img, video, audio, iframe, embed):not(.lazy-open) {
   display: none;
 }
 
@@ -1955,6 +1955,8 @@ text-shadow:
   object-fit: cover;
   display: block;
 }
+
+.oneth embed { max-width: 100%; }
 
 .oneth video {
   width: 100%;
@@ -3676,6 +3678,21 @@ table.bingo-card td.crostN {
   letter-spacing: 0.05em;
   animation: bingo 0.1s infinite alternate;
   animation-timing-function: ease-in-out;
+}
+
+table.bingo-card span.crostN {
+  font-family: 'Courier Prime', monospace;
+  font-size: clamp(0.52rem, 1.8vw, 0.78rem);
+  background: none;
+  color: #fff;
+  letter-spacing: 0.05em;
+  animation: bexti 0.1s infinite alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes bexti {
+  0%   { color: black; font-size: 13px;}
+  100%  { color: rgb(168, 92, 185); font-size: 14px;}
 }
 
 @keyframes bingo {

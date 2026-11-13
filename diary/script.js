@@ -947,24 +947,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ---------- click-to-load media ----------
 function setupLazyMedia() {
+  var MEDIA = 'img, video, audio, iframe, embed, object';
+
   document.querySelectorAll('.img, .medial').forEach(function (group) {
-    var media = group.querySelectorAll('img, video, audio, iframe');
+    var media = group.querySelectorAll(MEDIA);
     if (!media.length) return;
 
-    // What gets revealed: the media boxes inside .img, or the media elements themselves in .medial
     var boxes = group.classList.contains('img')
       ? Array.from(group.children).filter(function (c) { return c.tagName === 'DIV'; })
       : Array.from(media);
     if (!boxes.length) return;
 
-    // Button label, e.g. "🖼️ Show 3 images" / "🎬 Show video" / "🎧 Show audio"
-    var first = media[0].tagName.toLowerCase();
-    var icon = first === 'audio' ? '🎧' : (first === 'video' || first === 'iframe') ? '🎬' : '🖼️';
-    var noun = first === 'audio' ? 'audio' : (first === 'video' || first === 'iframe') ? 'video' : 'image';
+    var tag = media[0].tagName.toLowerCase();
+    var kinds = {
+      img:    ['🖼️', 'image'],
+      video:  ['🎬', 'video'],
+      iframe: ['🎬', 'video'],
+      audio:  ['🎧', 'audio'],
+      embed:  ['📄', 'document'],
+      object: ['📄', 'document']
+    };
+    var k = kinds[tag];
+
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'lazy-btn';
-    btn.textContent = icon + ' Show ' + (media.length > 1 ? media.length + ' items' : noun);
+    btn.textContent = k[0] + ' Show ' + (media.length > 1 ? media.length + ' items' : k[1]);
 
     btn.addEventListener('click', function () {
       boxes.forEach(function (b) { b.classList.add('lazy-open'); });
@@ -980,4 +988,3 @@ if (document.readyState === 'loading') {
 } else {
   setupLazyMedia();
 }
-  
